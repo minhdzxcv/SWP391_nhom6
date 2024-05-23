@@ -34,7 +34,7 @@ public class LogoutServlet extends HttpServlet {
                 return;
             }
         } catch(Exception e) {}
-        request.getSession().removeAttribute("User");
+        request.getSession().removeAttribute("email");
         request.getSession().removeAttribute("Mentor");
         request.getSession().removeAttribute("Mentee");
         response.sendRedirect("signin");

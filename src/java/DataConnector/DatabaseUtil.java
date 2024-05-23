@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author TGDD
+ * @author ADMIN
  */
 public class DatabaseUtil {
 

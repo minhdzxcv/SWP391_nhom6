@@ -7,178 +7,179 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Skill, java.util.ArrayList, model.User, java.text.SimpleDateFormat, model.Mentor, model.Mentee, model.CV, DAO.CvDAO" %>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
 
-<head>
-    <style>
-        body{
-    background: #f5f5f5;
-    margin-top:20px;
-}
+    <head>
+        <style>
+            body{
+                background: #f5f5f5;
+                margin-top:20px;
+            }
 
-.ui-w-80 {
-    width: 80px !important;
-    height: auto;
-}
+            .ui-w-80 {
+                width: 80px !important;
+                height: auto;
+            }
 
-.btn-default {
-    border-color: rgba(24,28,33,0.1);
-    background: rgba(0,0,0,0);
-    color: #4E5155;
-}
+            .btn-default {
+                border-color: rgba(24,28,33,0.1);
+                background: rgba(0,0,0,0);
+                color: #4E5155;
+            }
 
-label.btn {
-    margin-bottom: 0;
-}
+            label.btn {
+                margin-bottom: 0;
+            }
 
-.btn-outline-primary {
-    border-color: #26B4FF;
-    background: transparent;
-    color: #26B4FF;
-}
+            .btn-outline-primary {
+                border-color: #26B4FF;
+                background: transparent;
+                color: #26B4FF;
+            }
 
-.btn {
-    cursor: pointer;
-}
+            .btn {
+                cursor: pointer;
+            }
 
-.text-light {
-    color: #babbbc !important;
-}
+            .text-light {
+                color: #babbbc !important;
+            }
 
-.btn-facebook {
-    border-color: rgba(0,0,0,0);
-    background: #3B5998;
-    color: #fff;
-}
+            .btn-facebook {
+                border-color: rgba(0,0,0,0);
+                background: #3B5998;
+                color: #fff;
+            }
 
-.btn-instagram {
-    border-color: rgba(0,0,0,0);
-    background: #000;
-    color: #fff;
-}
+            .btn-instagram {
+                border-color: rgba(0,0,0,0);
+                background: #000;
+                color: #fff;
+            }
 
-.card {
-    background-clip: padding-box;
-    box-shadow: 0 1px 4px rgba(24,28,33,0.012);
-}
+            .card {
+                background-clip: padding-box;
+                box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+            }
 
-.row-bordered {
-    overflow: hidden;
-}
+            .row-bordered {
+                overflow: hidden;
+            }
 
-.account-settings-fileinput {
-    position: absolute;
-    visibility: hidden;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-}
-.account-settings-links .list-group-item.active {
-    font-weight: bold !important;
-}
-html:not(.dark-style) .account-settings-links .list-group-item.active {
-    background: transparent !important;
-}
-.account-settings-multiselect ~ .select2-container {
-    width: 100% !important;
-}
-.light-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
-}
-.material-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
-}
-.material-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
-}
-.dark-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(255, 255, 255, 0.03) !important;
-}
-.dark-style .account-settings-links .list-group-item.active {
-    color: #fff !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-    color: #4E5155 !important;
-}
-.light-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24,28,33,0.03) !important;
-}
+            .account-settings-fileinput {
+                position: absolute;
+                visibility: hidden;
+                width: 1px;
+                height: 1px;
+                opacity: 0;
+            }
+            .account-settings-links .list-group-item.active {
+                font-weight: bold !important;
+            }
+            html:not(.dark-style) .account-settings-links .list-group-item.active {
+                background: transparent !important;
+            }
+            .account-settings-multiselect ~ .select2-container {
+                width: 100% !important;
+            }
+            .light-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24, 28, 33, 0.03) !important;
+            }
+            .light-style .account-settings-links .list-group-item.active {
+                color: #4e5155 !important;
+            }
+            .material-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24, 28, 33, 0.03) !important;
+            }
+            .material-style .account-settings-links .list-group-item.active {
+                color: #4e5155 !important;
+            }
+            .dark-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(255, 255, 255, 0.03) !important;
+            }
+            .dark-style .account-settings-links .list-group-item.active {
+                color: #fff !important;
+            }
+            .light-style .account-settings-links .list-group-item.active {
+                color: #4E5155 !important;
+            }
+            .light-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24,28,33,0.03) !important;
+            }
 
-</style>
-<style>
-    body{
-    background: #f7f7ff;
-    margin-top:20px;
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid transparent;
-    border-radius: .25rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
-}
-.me-2 {
-    margin-right: .5rem!important;
-}
-    
-</style>
-    <meta charset="utf-8">
-    <title>eLEARNING - eLearning HTML Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+        </style>
+        <style>
+            body{
+                background: #f7f7ff;
+                margin-top:20px;
+            }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border: 0 solid transparent;
+                border-radius: .25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+            }
+            .me-2 {
+                margin-right: .5rem!important;
+            }
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+        </style>
+        <meta charset="utf-8">
+        <title>eLEARNING - eLearning HTML Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Libraries Stylesheet -->
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
-</head>
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
+    </head>
+
+    <body>
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
-    </div>
-    <!-- Spinner End -->
+        <!-- Spinner End -->
 
 
-   <%@include file="header.jsp" %>
-   <%
+        <%@include file="header.jsp" %>
+        <%
             ArrayList<Skill> skills = (ArrayList<Skill>)request.getAttribute("skills");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             CV cv = null;
@@ -186,232 +187,374 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
             if(m.getCvID() != 0) {
                 cv = CvDAO.getCV(m.getCvID());
             }
-            %>
+        %>
 
-  <div class="container light-style flex-grow-1 container-p-y">
+        <div class="container light-style flex-grow-1 container-p-y">
 
-    <h4 class="font-weight-bold py-3 mb-4">
-      TÀI KHOẢN
-    </h4>
+            <h4 class="font-weight-bold py-3 mb-4">
+                TÀI KHOẢN
+            </h4>
 
-    <div class="card overflow-hidden">
-      <div class="row no-gutters row-bordered row-border-light">
-          <div class="col-md-3 pt-0">
-              <div class="list-group list-group-flush account-settings-links">                  
-                  <a id="general" class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
-                  <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
-                  <a id="cv" class="list-group-item list-group-item-action" data-toggle="list" href="#">CV</a>    
-                  <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
-                  <%}else {%>
-                  <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
-                  <%}%>
-                  <a id="password" class="list-group-item list-group-item-action " data-toggle="list" href="#">Change password</a>  
-                  
-                  <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
-                  <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
-                  <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
-              </div>
-          </div>
-        <div class="col-md-9">
-            <div class="tab-content">
-                <!-- General -->
-                
-                <!-- Change password -->
-                 <div class="container">
-		<div class="main-body">
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex flex-column align-items-center text-center">
-								<img src="<%=u.getAvatar() == null ? "https://files.playerduo.net/production/images/avatar31.png" : u.getAvatar() %>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
-								<div class="mt-3">
-									<h4>John Doe</h4>
-									<p class="text-secondary mb-1">Full Stack Developer</p>
-									<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-									<button class="btn btn-primary">Follow</button>
-									<button class="btn btn-outline-primary">Message</button>
-								</div>
-							</div>
-							<hr class="my-4">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe me-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
-									<span class="text-secondary">https://bootdey.com</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github me-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
-									<span class="text-secondary">bootdey</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
-									<span class="text-secondary">@bootdey</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
-									<span class="text-secondary">bootdey</span>
-								</li>
-								<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-									<h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-									<span class="text-secondary">bootdey</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-8">
-					<div class="card">
-						<div class="card-body">
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Full Name</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="John Doe">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Email</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="john@example.com">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Phone</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="(239) 816-9029">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Mobile</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="(320) 380-4539">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Address</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="Bay Area, San Francisco, CA">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-9 text-secondary">
-									<input type="button" class="btn btn-primary px-4" value="Save Changes">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="d-flex align-items-center mb-3">Project Status</h5>
-									<p>Web Design</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>Website Markup</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>One Page</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>Mobile Template</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>Backend API</p>
-									<div class="progress" style="height: 5px">
-										<div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>               
-                <!-- Notifications -->
-                
-                        
+            <div class="card overflow-hidden">
+                <div class="row no-gutters row-bordered row-border-light">
+                    <div class="col-md-3 pt-0">
+                        <div class="list-group list-group-flush account-settings-links">                  
+                            <a id="general" class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+                            <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
+                            <a id="cv" class="list-group-item list-group-item-action" data-toggle="list" href="#">CV</a>    
+                            <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
+                            <%}else {%>
+                            <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
+                            <%}%>
+                            <a id="password" class="list-group-item list-group-item-action " data-toggle="list" href="#">Change password</a>  
+
+                            <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
+                            <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
+                            <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
+                            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <!-- General -->
+
+                            <!-- Change password -->
+
+                            <div class="container">
+                                <div class="main-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <hr>
+                                                    <div class="d-flex flex-column align-items-center text-center">
+                                                        <img src="<%=u.getAvatar() == null ? "https://files.playerduo.net/production/images/avatar31.png" : u.getAvatar() %>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                                        <div class="mt-3">
+                                                            <h4><%=u.getFullname()%></h4>
+                                                            <p class="text-secondary mb-1"><%=u.getPhone()%></p>
+                                                            <p class="text-secondary mb-1"><%=u.getEmail()%></p>
+                                                            <p class="text-muted font-size-sm"><%=u.getAddress()%></p>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card">
+                                                <hr>
+                                                <h3>Thông tin cơ bản</h3>
+
+                                                <form  method="post">
+                                                    <div class="card-body">
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">Mô tả:</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input class="form-control"type="text" name="description" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getDescription() == null) ? "" : m.getDescription()%>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">Thành tựu:</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input class="form-control"type="text" name="achivement" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getAchivement() == null) ? "" : m.getAchivement()%>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <button class="form-control"type="submit" class="btn-update">Cập nhật</button>
+                                                        </div>
+
+                                                    </div>
+                                                </form>        
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+
+                                                    <div class="card">
+                                                        <hr>
+                                                        <h3>Thông tin CV</h3>
+<%if(cv == null) {%> <p class="control-label">Chưa có CV</p><%} 
+                                                    if(cv != null) {%> 
+                                                        <form  method="post">
+                                                            <div class="card-body">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Profession Introduction:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control" type="text" name="profession" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getProfessionIntro() == null ? "" : cv.getProfessionIntro()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Description:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control"type="text" name="descrip" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getDescription() == null ? "" : cv.getDescription()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Giá thuê mỗi slots:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control"type="number" name="MoneyOfSlot" min="1" required value="<%=cv.getMoneyofslot()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Skills:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                       <%for(int i = 0; i < cv.getSkills().size(); i++) {%>
+                                                    <div class="choose-game" title="Nhấn để xóa skill" onclick="deleteSkill(<%=cv.getSkills().get(i).getId()%>)" style="background:  center center no-repeat;margin: 0 8px 6px 0;border-radius: 10px;float: left;min-width: 100px;text-align: center;">
+                                                        <p class="overlay" style="text-shadow: 2px 0 0 #000;margin: 0;padding: 13px 16px;color: #fff;font-weight: 700;font-size: 13px;background: rgba(0,0,0,.75);border-radius: 10px;text-transform: capitalize;"><%=cv.getSkills().get(i).getName()%> </p>
+                                                    </div><%}%>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                       <select style="margin-bottom: 0px;" onchange="if (this.selectedIndex)
+                                                                changeSelection(this);">
+                                                        <option selected disable>Thêm skill mới</option><%for(int i = 0; i < skills.size(); i++) {%> <option value="<%=skills.get(i).getId()%>"><%=skills.get(i).getName()%> </option><%}%>
+                                                    </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <%}%> 
+                                                                <div class="row mb-3">
+                                                                   <button class="form-control"type="submit" class="btn-update" id="<%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%>"><%=(m == null || m.getCvID() == 0) ? "Tạo CV" : "Cập Nhật CV"%> </button><%=cv != null ? "</form>" : ""%>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-    </div>
-
-    
-
-  </div>
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- Notifications -->
+
+        <script>
+            function deleteSkill(id) {
+            <%if(cv != null && cv.getSkills().size() > 1) {%>
+                let param = "type=delete&id=" + id;
+                fetch("cv",
+                        {
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            method: "POST",
+                            body: param
+                        })
+                setTimeout(function () {
+                    window.location.reload();
+                }, 100);
+            <%} else {%>
+                alert('Bạn phải có ít nhất 1 skill!');
+            <%}%>
+            }
+            function changeSelection(select) {
+                let param = "type=add&id=" + select.value;
+                fetch("cv",
+                        {
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            method: "POST",
+                            body: param
+                        })
+                setTimeout(function () {
+                    window.location.reload();
+                }, 100);
+                //console.log(select.value);
+            }
+            if (document.getElementById('createCV') != null) {
+                document.getElementById('createCV').onclick = function () {
+                    if (!JSON.stringify(document.body.style).includes("overflow: hidden;")) {
+                        document.body.style = 'overflow: hidden; padding-right: 17px; background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
+                        //document.body.style = 'background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
+                        let modal = document.createElement('div');
+                modal.innerHTML = '<div role="dialog"><div class="fade modal-backdrop"></div><div role="dialog" tabindex="-1" class="fade modal" style="display: block;"><div class="auth-modal modal-dialog"><div class="modal-content" role="document"><div class="modal-body"><div class="logo"><img alt="logo playerduo" style="border-radius: 20%;" src="images/logo.png"><h1>Happy Programming</h1></div><div class="content-main"><form method="post"><div class="fieldGroup "><input type="text" name="profession" placeholder="Profession Introduction" maxlength="255" autocomplete="false" required value=""></div><div class="fieldGroup "><input type="text" name="service" placeholder="Service Description" required maxlength="255" autocomplete="false" value=""></div><div class="fieldGroup" style="text-align: center;"><span>Chọn kĩ năng bạn dạy:</span></div><div style="margin: 10px 0 0;" class="fieldGroup"><select name="skills" style="height: 100px" required multiple><%for(int i = 0; i < skills.size(); i++) {%><option value="<%=skills.get(i).getId()%>"><%=skills.get(i).getName()%></option><%}%></select></div><div class="fieldGroup" style="text-align: center;"><input type="number" name="cash" step="1" min="1" placeholder="Giá Thuê Trên Slot"></div><button type="submit"><span>Tạo CV</span></button><input type="hidden" name="type" value="create"></form></div></div></div></div></div></div>';
+                        document.body.appendChild(modal.firstChild);
+                        setTimeout(function () {
+                            document.body.lastChild.children[1].classList.add("in");
+                            document.body.lastChild.firstChild.classList.add("in");
+                            window.onclick = function (e) {
+                                if (!document.getElementsByClassName('modal-content')[0].contains(e.target)) {
+                                    document.body.lastChild.firstChild.classList.remove("in");
+                                    document.body.lastChild.children[1].classList.remove("in");
+                                    setTimeout(function () {
+                                        document.body.style = 'background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
+                                        document.body.removeChild(document.body.lastChild);
+                                        window.onclick = null;
+                                    }, 100)
+                                }
+                            }
+                        }, 1)
+                    } else {
+                        //document.body.style = 'overflow: hidden; padding-right: 17px; background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
+                        document.body.lastChild.children[1].classList.remove("in");
+                        document.body.lastChild.firstChild.classList.remove("in");
+                        setTimeout(function () {
+                            document.body.style = 'background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
+                            document.body.removeChild(document.body.lastChild);
+                            window.onclick = null;
+                        }, 100)
+                    }
+                }
+            } else {
+            }
+            <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[2].onclick = function () {
+                window.location.href = "cv";
+            };
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[3].onclick = function () {
+                window.location.href = "statistic";
+            };
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[4].onclick = function () {
+                window.location.href = "transaction";
+            };
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[5].onclick = function () {
+                window.location.href = "bank";
+            };
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[6].onclick = function () {
+                window.location.href = "wallet";
+            };
+            <%}%>
+            document.getElementsByClassName('menu__setting--last panel panel-default')[0].onclick = function () {
+                window.location.href = "email";
+            };
+            document.getElementsByClassName('menu__setting--last panel panel-default')[1].onclick = function () {
+                window.location.href = "setting";
+            };
+            document.getElementsByClassName('menu__setting--sub panel panel-default')[0].onclick = function () {
+                window.location.href = "profile";
+            };
+            let cog = document.getElementsByClassName('fas fa-cog')[0].parentNode.children[1];
+            let collapse = cog.parentNode.parentNode.parentNode.parentNode.children[1];
+            document.getElementsByClassName('fas fa-cog')[0].parentNode.onclick = function () {
+                if (cog.classList.contains("fa-chevron-right")) {
+                    cog.classList.add("fa-chevron-down");
+                    cog.classList.remove("fa-chevron-right");
+                    collapse.classList.remove("collapse");
+                    collapse.classList.add("collapsing");
+                    setTimeout(function () {
+                        collapse.style = "height: 72px;";
+                    }, 1);
+                    setTimeout(function () {
+                        collapse.classList.remove("collapsing");
+                        collapse.classList.add("collapse");
+                        collapse.style = "";
+                        collapse.classList.add("in");
+                    }, 300);
+                } else {
+                    cog.classList.remove("fa-chevron-down");
+                    cog.classList.add("fa-chevron-right");
+                    collapse.style = "height: 72px;";
+                    collapse.classList.remove("collapse");
+                    collapse.classList.add("collapsing");
+                    setTimeout(function () {
+                        collapse.style = "height: 0px;";
+                    }, 1);
+                    setTimeout(function () {
+                        collapse.classList.remove("collapsing");
+                        collapse.classList.add("collapse");
+                        collapse.style = "height: 0px;";
+                        collapse.classList.remove("in");
+                    }, 300);
+                }
+            }
+            function isValidUrl(string) {
+                try {
+                    new URL(string);
+                    return true;
+                } catch (err) {
+                    return false;
+                }
+            }
+
+        </script>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    
 
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-     <script>
-    // Chọn các phần tử link
-    const statisticsLink = document.getElementById('statistics');
-    const historyLink = document.getElementById('history');
-    const payLink = document.getElementById('pay');
-    const walletLink = document.getElementById('wallet');
-    const passwordLink = document.getElementById('password');
-    const generalLink = document.getElementById('general');
-    const cvLink = document.getElementById('cv');
 
-    // Thêm sự kiện click cho từng link
-    passwordLink.addEventListener('click', function() {
-        window.location.href = 'setting.jsp';
-    });
-    
-    statisticsLink.addEventListener('click', function() {
-        window.location.href = 'statistic.jsp';
-    });
 
-    historyLink.addEventListener('click', function() {
-        window.location.href = 'transaction.jsp';
-    });
 
-    payLink.addEventListener('click', function() {
-        window.location.href = 'bank.jsp';
-    });
 
-    walletLink.addEventListener('click', function() {
-        window.location.href = 'wallet.jsp';
-    });
-    
-    cvLink.addEventListener('click', function() {
-        window.location.href = 'cv.jsp';
-    });
-       
-    
-    
-</script>
-</body>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+        <script>
+            // Chọn các phần tử link
+            const statisticsLink = document.getElementById('statistics');
+            const historyLink = document.getElementById('history');
+            const payLink = document.getElementById('pay');
+            const walletLink = document.getElementById('wallet');
+            const passwordLink = document.getElementById('password');
+            const generalLink = document.getElementById('general');
+            const cvLink = document.getElementById('cv');
+
+            // Thêm sự kiện click cho từng link
+            passwordLink.addEventListener('click', function () {
+                window.location.href = 'setting';
+            });
+
+            statisticsLink.addEventListener('click', function () {
+                window.location.href = 'statistic';
+            });
+
+            historyLink.addEventListener('click', function () {
+                window.location.href = 'transaction';
+            });
+
+            payLink.addEventListener('click', function () {
+                window.location.href = 'bank';
+            });
+
+            walletLink.addEventListener('click', function () {
+                window.location.href = 'wallet';
+            });
+
+            cvLink.addEventListener('click', function () {
+                window.location.href = 'cv';
+            });
+
+
+
+        </script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+
+    </body>
 
 </html>

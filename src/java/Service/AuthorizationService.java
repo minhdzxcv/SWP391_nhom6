@@ -13,7 +13,7 @@ import model.User;
 
 /**
  *
- * @author TGDD
+ * @author ADMIN
  */
 public class AuthorizationService {
     

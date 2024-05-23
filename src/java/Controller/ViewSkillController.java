@@ -40,7 +40,7 @@ public class ViewSkillController extends HttpServlet {
             if (!AuthorizationService.gI().Authorization(request, response)) {
                 return;
             }
-            
+    
                 ArrayList<Skill> a = SkillDAO.getAll();
                 for (int i = 0; i < a.size(); i++) {
                     for (int j = i; j < a.size(); j++) {

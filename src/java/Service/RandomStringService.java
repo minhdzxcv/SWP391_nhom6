@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author TGDD
+ * @author ADMIN
  */
 public class RandomStringService {
     public static String random(int len) {

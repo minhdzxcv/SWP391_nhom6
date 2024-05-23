@@ -145,10 +145,7 @@ public static HashMap<Mentor, MentorDetail> getAllBySkillId(int id) throws Excep
         return arr;
     }
 
-    public static MentorStatistic getMentorStatistic(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    public static void updateAchivement(int id, String achivement) throws Exception {
+   public static void updateAchivement(int id, String achivement) throws Exception {
         Connection dbo = DatabaseUtil.getConn();
         try {
             PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Mentor] WHERE [UserID] = ?");
@@ -176,8 +173,7 @@ public static HashMap<Mentor, MentorDetail> getAllBySkillId(int id) throws Excep
             dbo.close();
         }
     }
-    
-    public static void updateDescription(int id, String description) throws Exception {
+   public static void updateDescription(int id, String description) throws Exception {
         Connection dbo = DatabaseUtil.getConn();
         try {
             PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Mentor] WHERE [UserID] = ?");
@@ -205,5 +201,4 @@ public static HashMap<Mentor, MentorDetail> getAllBySkillId(int id) throws Excep
             dbo.close();
         }
     }
-    
 }

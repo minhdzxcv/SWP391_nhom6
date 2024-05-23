@@ -206,10 +206,10 @@ public class UserDAO {
         Connection dbo = DatabaseUtil.getConn();
         try {
             PreparedStatement ps = dbo.prepareStatement("UPDATE [User] SET [dob] = ? WHERE [UserID] = ?");
-            ps.setDate(1, Date.valueOf(Dob));
+            ps.setString(1, Dob);
             ps.setInt(2, id);
             ps.executeUpdate();
-            dbo.commit();
+           
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();

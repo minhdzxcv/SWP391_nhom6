@@ -171,24 +171,24 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     </h4>
 
     <div class="card overflow-hidden">
-      <div class="row no-gutters row-bordered row-border-light">
-          <div class="col-md-3 pt-0">
-              <div class="list-group list-group-flush account-settings-links">                  
-                  <a id="general" class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
-                  <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
-                  <a id="cv" class="list-group-item list-group-item-action" data-toggle="list" href="#">CV</a>    
-                  <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
-                  <%}else {%>
-                  <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
-                  <%}%>
-                  <a id="password" class="list-group-item list-group-item-action " data-toggle="list" href="#">Change password</a>  
-                  
-                  <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
-                  <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
-                  <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
-              </div>
+  <div class="row no-gutters row-bordered row-border-light">
+      <div class="col-md-3 pt-0">
+          <div class="list-group list-group-flush account-settings-links">                  
+              <a id="general" class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+              <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
+              <a id="cv" class="list-group-item list-group-item-action" data-toggle="list" href="#">CV</a>    
+              <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
+              <%}else {%>
+              <a id="statistics" class="list-group-item list-group-item-action " data-toggle="list" href="#">Request statistics</a>
+              <%}%>
+              <a id="password" class="list-group-item list-group-item-action " data-toggle="list" href="#">Change password</a>  
+              
+              <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
+              <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
+              <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
           </div>
+      </div>
         <div class="col-md-9">
             <div class="tab-content">
                 <h3>Cài đặt mật khẩu</h3>
@@ -259,27 +259,27 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
     // Thêm sự kiện click cho từng link
     passwordLink.addEventListener('click', function() {
-        window.location.href = 'setting.jsp';
+        window.location.href = 'setting';
     });
     
     statisticsLink.addEventListener('click', function() {
-        window.location.href = 'statistic.jsp';
+        window.location.href = 'statistic';
     });
 
     historyLink.addEventListener('click', function() {
-        window.location.href = 'transaction.jsp';
+        window.location.href = 'transaction';
     });
 
     payLink.addEventListener('click', function() {
-        window.location.href = 'bank.jsp';
+        window.location.href = 'bank';
     });
 
     walletLink.addEventListener('click', function() {
-        window.location.href = 'wallet.jsp';
+        window.location.href = 'wallet';
     });
     
     cvLink.addEventListener('click', function() {
-        window.location.href = 'cv.jsp';
+        window.location.href = 'cv';
     });
        
     

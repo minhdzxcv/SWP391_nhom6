@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package Controller;
 
-import Service.AuthorizationService;
 import DAO.CvDAO;
 import DAO.MentorDAO;
 import DAO.SkillDAO;
 import DAO.UserDAO;
+import Service.AuthorizationService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,22 +18,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Iterator;
 import model.Mentor;
 import model.Skill;
 import model.User;
 
 /**
  *
- * @author TGDD
+ * @author ADMIN
  */
-@WebServlet(name = "CVSettingController", urlPatterns = {"/cv"})
+@WebServlet(name="CvServlet", urlPatterns={"/cv"})
 public class CvServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -85,6 +83,7 @@ public class CvServlet extends HttpServlet {
             }
         } catch(Exception e) {}
         User u = (User) request.getSession().getAttribute("email");
+        
         Mentor m = (Mentor) UserDAO.getRole(u.getId(), u.getRole());
         String type = request.getParameter("type");
         if (type == null) {
@@ -104,22 +103,22 @@ public class CvServlet extends HttpServlet {
             }
         } else {
             if(type.equalsIgnoreCase("create")) {
-                String Profession = request.getParameter("profession");
-                String Service = request.getParameter("service");
+                String ProfessionIntro = request.getParameter("ProfessionIntro");
+                String Description = request.getParameter("Description");
                 String[] skills = request.getParameterValues("skills");
-                String sCash = request.getParameter("cash");
-                int cash = Integer.parseInt(sCash);
+                String sMoney = request.getParameter("money");
+                int money = Integer.parseInt(sMoney);
                 try {
-                    CvDAO.createCV(u.getId(), Profession, Service, skills, cash);
+                    CvDAO.createCV(u.getId(), ProfessionIntro, Description, skills, money);
                 } catch(Exception e) {}
             } else if(type.equalsIgnoreCase("update")) {
                 String Profession = request.getParameter("profession");
-                String Service = request.getParameter("service");
-                String CashPerSlot = request.getParameter("cashPerSlot");
-                if(Profession != null && !Profession.isEmpty() && Service != null && !Service.isEmpty() && CashPerSlot != null && !CashPerSlot.isEmpty()) {
+                String Descrip = request.getParameter("descrip");
+                String MoneyOfSlot = request.getParameter("MoneyOfSlot");
+                if(Profession != null && !Profession.isEmpty() && Descrip != null && !Descrip.isEmpty() && MoneyOfSlot != null && !MoneyOfSlot.isEmpty()) {
                 try {
-                    int CashPS = Integer.parseInt(CashPerSlot);
-                    CvDAO.updateCV(m.getCvID(), Profession, Service, CashPS);
+                    int Money = Integer.parseInt(MoneyOfSlot);
+                    CvDAO.updateCV(m.getCvID(), Profession, Descrip, Money);
                     
                 } catch(Exception e) {
                     e.printStackTrace();

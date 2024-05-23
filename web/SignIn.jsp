@@ -71,7 +71,7 @@
                                             </label>
                                         </div>
                                         <div class="w-50 text-md-right">
-                                            <a href="forgotPassword.jsp">Forgot Password</a>
+                                            <a href="forgot">Forgot Password</a>
                                         </div>
                                     </div>
                                 </form>

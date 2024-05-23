@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet {
         } catch(Exception e) {}
         
     
-        User u = (User) request.getSession().getAttribute("User");
+        User u = (User) request.getSession().getAttribute("email");
         if (u != null) {
             if (UserDAO.isMentee(u)) {
                 Mentee r = (Mentee) UserDAO.getRole(u.getId(), u.getRole());

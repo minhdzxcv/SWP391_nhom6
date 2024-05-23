@@ -18,6 +18,8 @@ import model.Mentor;
 import model.User;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
 @MultipartConfig(
@@ -74,6 +76,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String updatedDob = request.getParameter("dob");
     String updatedAddress = request.getParameter("address");
     String updatedGender = request.getParameter("gender");
+        System.out.println("date: "+updatedDob);
 
     // Cập nhật họ và tên nếu có
     if (updatedFullName != null && !updatedFullName.isEmpty()) {
@@ -135,29 +138,58 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     }
 
     // Cập nhật ảnh đại diện nếu có
-    if(request.getPart("avt") != null) {
-        try {
-            Part avt = request.getPart("avt");
-            BufferedImage img = ImageIO.read(avt.getInputStream());
-            String path = request.getServletContext().getRealPath("/avatar");
-            String realpath = request.getServletContext().getRealPath("/avatar").replace("\\build\\web\\avatar", "\\web\\avatar");
-            File outputfile = new File(path+"/"+u.getUsername()+"_"+u.getId()+".png");
-            ImageIO.write(img, "png", outputfile);
-            File realoutputfile = new File(realpath+"/"+u.getUsername()+"_"+u.getId()+".png");
-            ImageIO.write(img, "png", realoutputfile);
-            try {
-                UserDAO.updateAvatar(u.getId(), "avatar"+"/"+u.getUsername()+"_"+u.getId()+".png");
-                u.setAvatar("avatar"+"/"+u.getUsername()+"_"+u.getId()+".png");
-                request.getSession().setAttribute("u", u);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            response.sendRedirect("profile");
-            return;
-        } catch(Exception e) {
-            request.setAttribute("alert", "Vui lòng chọn file hợp lệ");
+     if (request.getPart("avatar") != null) {
+    try {
+        Part avatarPart = request.getPart("avatar");
+        
+        // Check file size
+        long fileSize = avatarPart.getSize();
+        if (fileSize > 800 * 1024) { // 800KB limit
+            throw new IllegalArgumentException("File size exceeds the limit.");
         }
+        
+        // Read the image from the input stream
+        BufferedImage img = ImageIO.read(avatarPart.getInputStream());
+        
+        // Define file paths
+        String relativePath = "/avatar";
+        String absolutePath = request.getServletContext().getRealPath(relativePath);
+        
+        // Ensure the directory exists
+        File directory = new File(absolutePath);
+        if (!directory.exists()) {
+            directory.mkdirs(); // Create directories if not exist
+        }
+        
+        // Generate unique file name based on user info
+        String fileName = u.getUsername() + "_" + u.getId() + ".png";
+        
+        // Write the image to the file
+        File outputFile = new File(directory, fileName);
+        ImageIO.write(img, "png", outputFile);
+        
+        // Update the user's avatar path in the database
+        String avatarPath = relativePath + "/" + fileName;
+        UserDAO.updateAvatar(u.getId(), avatarPath);
+        
+        // Update user object
+        u.setAvatar(avatarPath);
+        
+        // Update session attribute
+        request.getSession().setAttribute("email", u);
+        
+        // Redirect to profile page
+        response.sendRedirect("profile");
+        return;
+    } catch (Exception e) {
+        e.printStackTrace(); // Log the error for debugging
+        request.setAttribute("alert", "Vui lòng chọn file hợp lệ (JPG, GIF, hoặc PNG, kích thước tối đa 800KB).");
     }
+     }
+
+// If the code reaches here, either no avatar was uploaded or an error occurred
+// Handle accordingly
+
 
     // Cập nhật thông tin người dùng trong session nếu có
     try {

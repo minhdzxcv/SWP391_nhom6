@@ -64,8 +64,8 @@
             <div  class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="home.jsp" class="nav-item nav-link">Home</a>
-                    <a href="#" class="nav-item nav-link">Messenger</a>
-                    <a href="#" class="nav-item nav-link">List Request</a>
+                    <a href="404.jsp" class="nav-item nav-link">Messenger</a>
+                    <a href="404.jsp" class="nav-item nav-link">List Request</a>
                     <a href="Contact.jsp" class="nav-item nav-link active">Contact</a>
                     <a href="SignIn.jsp" class="nav-item nav-link active">SignIn</a>
                 </div>
@@ -137,13 +137,13 @@
             <a class="dropdown-item" href="wallet"><i class="fas fa-minus"></i> Rút tiền</a>
             <a class="dropdown-item" href="wallet"><i class="fas fa-credit-card"></i> Nạp Tiền</a>
             <% if(u.getRole().equalsIgnoreCase("mentor")) { %>
-                <a class="dropdown-item" href="cv.jsp"><i class="fas fa-user-lock"></i> Tạo/Sửa CV</a>
+                <a class="dropdown-item" href="cv"><i class="fas fa-user-lock"></i> Tạo/Sửa CV</a>
             <% } %>
             <a class="dropdown-item" href="transaction"><i class="fas fa-clock"></i> Lịch sử giao dịch</a>
             <a class="dropdown-item" href="<%=(u.getRole().equalsIgnoreCase("admin") || u.getRole().equalsIgnoreCase("manager")) ? "admin/request" : "schedule"%>">
                 <i class="fas fa-users"></i> <%=(u.getRole().equalsIgnoreCase("admin") || u.getRole().equalsIgnoreCase("manager")) ? "Admin Setting" : "Schedule"%>
             </a>
-            <a class="dropdown-item" href="setting.jsp"><i class="fas fa-cogs"></i> Cài đặt tài khoản</a>
+            <a class="dropdown-item" href="setting"><i class="fas fa-cogs"></i> Cài đặt tài khoản</a>
             <a class="dropdown-item" href="logout"><i class="fas fa-power-off"></i> Đăng xuất</a>
             <div class="box-item mt-2">
         <a href="#" target="_blank" rel="noopener noreferrer">

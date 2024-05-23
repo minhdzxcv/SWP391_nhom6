@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author TGDD
+ * @author ADMIN
  */
 public class MailService {
     public static void sendMail(String email, String subject, String content) throws Exception {
