@@ -266,7 +266,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="row mb-3">
-                                                            <button class="form-control"type="submit" class="btn-update">Cập nhật</button>
+                                                            <button class="form-control"type="submit" class="btn-update">Update</button>
                                                         </div>
 
                                                     </div>
@@ -282,6 +282,7 @@
 <%if(cv == null) {%> <p class="control-label">Chưa có CV</p><%} 
                                                     if(cv != null) {%> 
                                                         <form  method="post">
+                                                            <input type="hidden" name="type" value="update">
                                                             <div class="card-body">
                                                                 <div class="row mb-3">
                                                                     <div class="col-sm-3">
@@ -327,7 +328,7 @@
                                                                 
                                                                 <%}%> 
                                                                 <div class="row mb-3">
-                                                                   <button class="form-control"type="submit" class="btn-update" id="<%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%>"><%=(m == null || m.getCvID() == 0) ? "Tạo CV" : "Cập Nhật CV"%> </button><%=cv != null ? "</form>" : ""%>
+                                                                   <button class="form-control"type="submit" class="btn-update" id="<%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%>"><%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%> </button><%=cv != null ? "</form>" : ""%>
                                                                 </div>
 
                                                             </div>
@@ -339,17 +340,13 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
+    
+<%@include file="footer.jsp" %>
         <!-- Notifications -->
 
         <script>
@@ -420,34 +417,7 @@
                         }, 100)
                     }
                 }
-            } else {
-            }
-            <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[2].onclick = function () {
-                window.location.href = "cv";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[3].onclick = function () {
-                window.location.href = "statistic";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[4].onclick = function () {
-                window.location.href = "transaction";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[5].onclick = function () {
-                window.location.href = "bank";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[6].onclick = function () {
-                window.location.href = "wallet";
-            };
-            <%}%>
-            document.getElementsByClassName('menu__setting--last panel panel-default')[0].onclick = function () {
-                window.location.href = "email";
-            };
-            document.getElementsByClassName('menu__setting--last panel panel-default')[1].onclick = function () {
-                window.location.href = "setting";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[0].onclick = function () {
-                window.location.href = "profile";
-            };
+            } 
             let cog = document.getElementsByClassName('fas fa-cog')[0].parentNode.children[1];
             let collapse = cog.parentNode.parentNode.parentNode.parentNode.children[1];
             document.getElementsByClassName('fas fa-cog')[0].parentNode.onclick = function () {
@@ -536,6 +506,9 @@
 
             cvLink.addEventListener('click', function () {
                 window.location.href = 'cv';
+            });
+            generalLink.addEventListener('click', function () {
+                window.location.href = 'profile';
             });
 
 

@@ -180,17 +180,13 @@
 
         <%@include file="header.jsp" %>
         <%
-           ArrayList<Skill> skills = (ArrayList<Skill>)request.getAttribute("skills");
-          SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-CV cv = null;
-Mentor m = (Mentor) session.getAttribute("Mentor");
-if (m == null) {
-    System.out.println("Mentor object is null in session");
-} else {
-    if (m.getCvID() != 0) {
-        cv = CvDAO.getCV(m.getCvID());
-    }
-}
+            ArrayList<Skill> skills = (ArrayList<Skill>)request.getAttribute("skills");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            CV cv = null;
+            Mentor m = (Mentor)session.getAttribute("Mentor");
+            if(m.getCvID() != 0) {
+                cv = CvDAO.getCV(m.getCvID());
+            }
         %>
 
         <div class="container light-style flex-grow-1 container-p-y">
@@ -223,112 +219,134 @@ if (m == null) {
                             <!-- General -->
 
                             <!-- Change password -->
+
                             <div class="container">
                                 <div class="main-body">
                                     <div class="row">
-
-
-                                        <div class="col-sm-12">
+                                        <div class="col-lg-4">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    <hr>
+                                                    <div class="d-flex flex-column align-items-center text-center">
+                                                        <img src="<%=u.getAvatar() == null ? "https://files.playerduo.net/production/images/avatar31.png" : u.getAvatar() %>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                                        <div class="mt-3">
+                                                            <h4><%=u.getFullname()%></h4>
+                                                            <p class="text-secondary mb-1"><%=u.getPhone()%></p>
+                                                            <p class="text-secondary mb-1"><%=u.getEmail()%></p>
+                                                            <p class="text-muted font-size-sm"><%=u.getAddress()%></p>
 
-                                                    <h3>Thông tin cơ bản</h3>
-                                                    <form  method="post">
-                                                        <div class="col-sm-12 text-secondary">
-                                                            <p>Mô tả</p>
-                                                            <input type="text" name="description" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getDescription() == null) ? "" : m.getDescription()%>">
                                                         </div>
-                                                </div>
-                                                </br>
-                                                <div class="col-sm-12 text-secondary">
-                                                            <p>Thành tựu</p>
-                                                    <input type="text" name="achivement" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getAchivement() == null) ? "" : m.getAchivement()%>">
-                                                </div>
+                                                    </div>
 
-                                                </br>
-
-                                                <div class="col-sm-9 text-secondary">
-                                                    <button type="submit" class="btn btn-primary px-4">Cập nhật</button>
 
                                                 </div>
-                                                </form>
-
                                             </div>
                                         </div>
-                                    </div>
-
-
-
-
-
-                                </div>
-
-
-                                <div class="row">
-
-
-                                    <div class="col-sm-12">
-                                        <div class="card">
-                                            <div class="card-body">
-
+                                        <div class="col-lg-8">
+                                            <div class="card">
+                                                <hr>
                                                 <h3>Thông tin cơ bản</h3>
-                                                <div class="col-sm-9 text-secondary">
-                                                    <%if(cv == null) {%> <p class="control-label">Chưa có CV</p><%} 
-                                                    if(cv != null) {%> 
-                                                    <form  method="post">
-                                                        <div class="col-sm-9 text-secondary">
-                                                            <p>Profession Introduction:</p>
-                                                            <input type="text" name="profession" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getProfessionIntro() == null ? "" : cv.getProfessionIntro()%>">
+
+                                                <form  method="post">
+                                                    <div class="card-body">
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">Mô tả:</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input class="form-control"type="text" name="description" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getDescription() == null) ? "" : m.getDescription()%>">
+                                                            </div>
                                                         </div>
-                                                </div>
-                                                </br>
-                                                <div class="col-sm-9 text-secondary">
-                                                    <p>Description:</p>
-                                                    <input type="text" name="descrip" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getDescription() == null ? "" : cv.getDescription()%>">
-                                                </div>
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">Thành tựu:</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input class="form-control"type="text" name="achivement" placeholder="" maxlength="5000" autocomplete="false" value="<%=(m == null || m.getAchivement() == null) ? "" : m.getAchivement()%>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3">
+                                                            <button class="form-control"type="submit" class="btn-update">Cập nhật</button>
+                                                        </div>
 
-                                                </br>
-                                                <div class="col-sm-9 text-secondary">
-                                                    <p>Giá thuê mỗi slots:</p>
-                                                    <input type="number" name="MoneyOfSlot" min="1" required value="<%=cv.getMoneyofslot()%>">
-                                                </div>
-                                                </br>
+                                                    </div>
+                                                </form>        
+                                            </div>
+                                            <div class="row">
 
-                                                <div class="col-sm-9 text-secondary">
-                                                    <p>Skills:</p>
-                                                    <%for(int i = 0; i < cv.getSkills().size(); i++) {%>
+                                                <div class="col-sm-12">
+
+                                                    <div class="card">
+                                                        <hr>
+                                                        <h3>Thông tin CV</h3>
+<%if(cv == null) {%> <p class="control-label">Chưa có CV</p><%} 
+                                                    if(cv != null) {%> 
+                                                        <form  method="post">
+                                                            <div class="card-body">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Profession Introduction:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control" type="text" name="profession" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getProfessionIntro() == null ? "" : cv.getProfessionIntro()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Description:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control"type="text" name="descrip" placeholder="" required maxlength="255" autocomplete="false" value="<%=cv.getDescription() == null ? "" : cv.getDescription()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Giá thuê mỗi slots:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                        <input class="form-control"type="number" name="MoneyOfSlot" min="1" required value="<%=cv.getMoneyofslot()%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mb-3">
+                                                                    <div class="col-sm-3">
+                                                                        <h6 class="mb-0">Skills:</h6>
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                       <%for(int i = 0; i < cv.getSkills().size(); i++) {%>
                                                     <div class="choose-game" title="Nhấn để xóa skill" onclick="deleteSkill(<%=cv.getSkills().get(i).getId()%>)" style="background:  center center no-repeat;margin: 0 8px 6px 0;border-radius: 10px;float: left;min-width: 100px;text-align: center;">
                                                         <p class="overlay" style="text-shadow: 2px 0 0 #000;margin: 0;padding: 13px 16px;color: #fff;font-weight: 700;font-size: 13px;background: rgba(0,0,0,.75);border-radius: 10px;text-transform: capitalize;"><%=cv.getSkills().get(i).getName()%> </p>
                                                     </div><%}%>
-                                                    <select style="margin-bottom: 0px;" onchange="if (this.selectedIndex)
+                                                                    </div>
+                                                                    <div class="col-sm-9 text-secondary">
+                                                                       <select style="margin-bottom: 0px;" onchange="if (this.selectedIndex)
                                                                 changeSelection(this);">
                                                         <option selected disable>Thêm skill mới</option><%for(int i = 0; i < skills.size(); i++) {%> <option value="<%=skills.get(i).getId()%>"><%=skills.get(i).getName()%> </option><%}%>
                                                     </select>
-                                                </div><%}%> 
-                                                <button type="submit" class="btn-update" id="<%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%>"><%=(m == null || m.getCvID() == 0) ? "Tạo CV" : "Cập Nhật CV"%> </button><%=cv != null ? "</form>" : ""%>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <%}%> 
+                                                                <div class="row mb-3">
+                                                                   <button class="form-control"type="submit" class="btn-update" id="<%=(m == null || m.getCvID() == 0) ? "createCV" : "updateCV"%>"><%=(m == null || m.getCvID() == 0) ? "Tạo CV" : "Cập Nhật CV"%> </button><%=cv != null ? "</form>" : ""%>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>  
+                                                    </div>
+                                                </div>
                                             </div>
-
-
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
+<%@include file="footer.jsp" %>
         <!-- Notifications -->
-
 
         <script>
             function deleteSkill(id) {
@@ -370,7 +388,7 @@ if (m == null) {
                         document.body.style = 'overflow: hidden; padding-right: 17px; background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
                         //document.body.style = 'background-color: rgb(233, 235, 238) !important; padding-top: 66px;';
                         let modal = document.createElement('div');
-                        modal.innerHTML = '<div role="dialog"><div class="fade modal-backdrop"></div><div role="dialog" tabindex="-1" class="fade modal" style="display: block;"><div class="auth-modal modal-dialog"><div class="modal-content" role="document"><div class="modal-body"><div class="logo"><img alt="logo playerduo" style="border-radius: 20%;" src="images/logo.png"><h1>Happy Programming</h1></div><div class="content-main"><form method="post"><div class="fieldGroup "><input type="text" name="ProfessionIntro" placeholder="Profession Introduction" maxlength="255" autocomplete="false" required value=""></div><div class="fieldGroup "><input type="text" name="Description" placeholder="Description" required maxlength="255" autocomplete="false" value=""></div><div class="fieldGroup" style="text-align: center;"><span>Chọn kĩ năng bạn dạy:</span></div><div style="margin: 10px 0 0;" class="fieldGroup"><select name="skills" style="height: 100px" required multiple><%for(int i = 0; i < skills.size(); i++) {%><option value="<%=skills.get(i).getId()%>"><%=skills.get(i).getName()%></option><%}%></select></div><div class="fieldGroup" style="text-align: center;"><input type="number" name="money" step="1" min="1" placeholder="Giá Thuê Trên Slot"></div><button type="submit"><span>Tạo CV</span></button><input type="hidden" name="type" value="create"></form></div></div></div></div></div></div>';
+                modal.innerHTML = '<div role="dialog"><div class="fade modal-backdrop"></div><div role="dialog" tabindex="-1" class="fade modal" style="display: block;"><div class="auth-modal modal-dialog"><div class="modal-content" role="document"><div class="modal-body"><div class="logo"><img alt="logo playerduo" style="border-radius: 20%;" src="images/logo.png"><h1>Happy Programming</h1></div><div class="content-main"><form method="post"><div class="fieldGroup "><input type="text" name="profession" placeholder="Profession Introduction" maxlength="255" autocomplete="false" required value=""></div><div class="fieldGroup "><input type="text" name="service" placeholder="Service Description" required maxlength="255" autocomplete="false" value=""></div><div class="fieldGroup" style="text-align: center;"><span>Chọn kĩ năng bạn dạy:</span></div><div style="margin: 10px 0 0;" class="fieldGroup"><select name="skills" style="height: 100px" required multiple><%for(int i = 0; i < skills.size(); i++) {%><option value="<%=skills.get(i).getId()%>"><%=skills.get(i).getName()%></option><%}%></select></div><div class="fieldGroup" style="text-align: center;"><input type="number" name="cash" step="1" min="1" placeholder="Giá Thuê Trên Slot"></div><button type="submit"><span>Tạo CV</span></button><input type="hidden" name="type" value="create"></form></div></div></div></div></div></div>';
                         document.body.appendChild(modal.firstChild);
                         setTimeout(function () {
                             document.body.lastChild.children[1].classList.add("in");
@@ -398,31 +416,7 @@ if (m == null) {
                         }, 100)
                     }
                 }
-            } else {
-            }
-            <%if(u.getRole().equalsIgnoreCase("mentor")) {%>
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[2].onclick = function () {
-                window.location.href = "cv";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[3].onclick = function () {
-                window.location.href = "statistic";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[4].onclick = function () {
-                window.location.href = "transaction";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[5].onclick = function () {
-                window.location.href = "bank";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[6].onclick = function () {
-                window.location.href = "wallet";
-            };
-            <%}%>
-            document.getElementsByClassName('menu__setting--last panel panel-default')[1].onclick = function () {
-                window.location.href = "setting";
-            };
-            document.getElementsByClassName('menu__setting--sub panel panel-default')[0].onclick = function () {
-                window.location.href = "profile";
-            };
+            } 
             let cog = document.getElementsByClassName('fas fa-cog')[0].parentNode.children[1];
             let collapse = cog.parentNode.parentNode.parentNode.parentNode.children[1];
             document.getElementsByClassName('fas fa-cog')[0].parentNode.onclick = function () {
@@ -467,6 +461,7 @@ if (m == null) {
             }
 
         </script>
+
 
 
 

@@ -14,114 +14,132 @@
 <html lang="en">
 
 <head>
-    <style>
-        .img-fixed-size {
-    width: 100%; /* Thiết lập kích thước chiều rộng của ảnh */
-    height: auto; /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
-}
-</style>
+   
 <style>
-    body{
-    background: #f5f5f5;
-    margin-top:20px;
-}
+            body{
+                background: #f5f5f5;
+                margin-top:20px;
+            }
 
-.ui-w-80 {
-    width: 80px !important;
-    height: auto;
-}
+            .ui-w-80 {
+                width: 80px !important;
+                height: auto;
+            }
 
-.btn-default {
-    border-color: rgba(24,28,33,0.1);
-    background: rgba(0,0,0,0);
-    color: #4E5155;
-}
+            .btn-default {
+                border-color: rgba(24,28,33,0.1);
+                background: rgba(0,0,0,0);
+                color: #4E5155;
+            }
 
-label.btn {
-    margin-bottom: 0;
-}
+            label.btn {
+                margin-bottom: 0;
+            }
 
-.btn-outline-primary {
-    border-color: #26B4FF;
-    background: transparent;
-    color: #26B4FF;
-}
+            .btn-outline-primary {
+                border-color: #26B4FF;
+                background: transparent;
+                color: #26B4FF;
+            }
 
-.btn {
-    cursor: pointer;
-}
+            .btn {
+                cursor: pointer;
+            }
 
-.text-light {
-    color: #babbbc !important;
-}
+            .text-light {
+                color: #babbbc !important;
+            }
 
-.btn-facebook {
-    border-color: rgba(0,0,0,0);
-    background: #3B5998;
-    color: #fff;
-}
+            .btn-facebook {
+                border-color: rgba(0,0,0,0);
+                background: #3B5998;
+                color: #fff;
+            }
 
-.btn-instagram {
-    border-color: rgba(0,0,0,0);
-    background: #000;
-    color: #fff;
-}
+            .btn-instagram {
+                border-color: rgba(0,0,0,0);
+                background: #000;
+                color: #fff;
+            }
 
-.card {
-    background-clip: padding-box;
-    box-shadow: 0 1px 4px rgba(24,28,33,0.012);
-}
+            .card {
+                background-clip: padding-box;
+                box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+            }
 
-.row-bordered {
-    overflow: hidden;
-}
+            .row-bordered {
+                overflow: hidden;
+            }
 
-.account-settings-fileinput {
-    position: absolute;
-    visibility: hidden;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-}
-.account-settings-links .list-group-item.active {
-    font-weight: bold !important;
-}
-html:not(.dark-style) .account-settings-links .list-group-item.active {
-    background: transparent !important;
-}
-.account-settings-multiselect ~ .select2-container {
-    width: 100% !important;
-}
-.light-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
-}
-.material-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
-}
-.material-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
-}
-.dark-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(255, 255, 255, 0.03) !important;
-}
-.dark-style .account-settings-links .list-group-item.active {
-    color: #fff !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-    color: #4E5155 !important;
-}
-.light-style .account-settings-links .list-group-item {
-    padding: 0.85rem 1.5rem;
-    border-color: rgba(24,28,33,0.03) !important;
-}
+            .account-settings-fileinput {
+                position: absolute;
+                visibility: hidden;
+                width: 1px;
+                height: 1px;
+                opacity: 0;
+            }
+            .account-settings-links .list-group-item.active {
+                font-weight: bold !important;
+            }
+            html:not(.dark-style) .account-settings-links .list-group-item.active {
+                background: transparent !important;
+            }
+            .account-settings-multiselect ~ .select2-container {
+                width: 100% !important;
+            }
+            .light-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24, 28, 33, 0.03) !important;
+            }
+            .light-style .account-settings-links .list-group-item.active {
+                color: #4e5155 !important;
+            }
+            .material-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24, 28, 33, 0.03) !important;
+            }
+            .material-style .account-settings-links .list-group-item.active {
+                color: #4e5155 !important;
+            }
+            .dark-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(255, 255, 255, 0.03) !important;
+            }
+            .dark-style .account-settings-links .list-group-item.active {
+                color: #fff !important;
+            }
+            .light-style .account-settings-links .list-group-item.active {
+                color: #4E5155 !important;
+            }
+            .light-style .account-settings-links .list-group-item {
+                padding: 0.85rem 1.5rem;
+                border-color: rgba(24,28,33,0.03) !important;
+            }
 
-</style>
+        </style>
+        <style>
+            body{
+                background: #f7f7ff;
+                margin-top:20px;
+            }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border: 0 solid transparent;
+                border-radius: .25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+            }
+            .me-2 {
+                margin-right: .5rem!important;
+            }
+
+        </style>
     <meta charset="utf-8">
     <title>Happy Programming</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -186,7 +204,7 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
               <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
               <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
               <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
-              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
+                              
           </div>
       </div>
         <div class="col-md-9">
@@ -280,6 +298,9 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     
     cvLink.addEventListener('click', function() {
         window.location.href = 'cv';
+    });
+    generalLink.addEventListener('click', function() {
+        window.location.href = 'profile';
     });
        
     

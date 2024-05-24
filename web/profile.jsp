@@ -8,54 +8,61 @@
 
     <head>
         <style>
-            .img-fixed-size {
-                width: 100%; /* Thiết lập kích thước chiều rộng của ảnh */
-                height: auto; /* Đảm bảo tỷ lệ khung hình được giữ nguyên */
-            }
-            body {
+            body{
                 background: #f5f5f5;
-                margin-top: 20px;
+                margin-top:20px;
             }
+
             .ui-w-80 {
                 width: 80px !important;
                 height: auto;
             }
+
             .btn-default {
-                border-color: rgba(24, 28, 33, 0.1);
-                background: rgba(0, 0, 0, 0);
+                border-color: rgba(24,28,33,0.1);
+                background: rgba(0,0,0,0);
                 color: #4E5155;
             }
+
             label.btn {
                 margin-bottom: 0;
             }
+
             .btn-outline-primary {
                 border-color: #26B4FF;
                 background: transparent;
                 color: #26B4FF;
             }
+
             .btn {
                 cursor: pointer;
             }
+
             .text-light {
                 color: #babbbc !important;
             }
+
             .btn-facebook {
-                border-color: rgba(0, 0, 0, 0);
+                border-color: rgba(0,0,0,0);
                 background: #3B5998;
                 color: #fff;
             }
+
             .btn-instagram {
-                border-color: rgba(0, 0, 0, 0);
+                border-color: rgba(0,0,0,0);
                 background: #000;
                 color: #fff;
             }
+
             .card {
                 background-clip: padding-box;
-                box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+                box-shadow: 0 1px 4px rgba(24,28,33,0.012);
             }
+
             .row-bordered {
                 overflow: hidden;
             }
+
             .account-settings-fileinput {
                 position: absolute;
                 visibility: hidden;
@@ -100,6 +107,30 @@
                 padding: 0.85rem 1.5rem;
                 border-color: rgba(24,28,33,0.03) !important;
             }
+
+        </style>
+        <style>
+            body{
+                background: #f7f7ff;
+                margin-top:20px;
+            }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border: 0 solid transparent;
+                border-radius: .25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+            }
+            .me-2 {
+                margin-right: .5rem!important;
+            }
+
         </style>
         <meta charset="utf-8">
         <title>User Profile</title>
@@ -153,7 +184,7 @@
                             <a id="history" class="list-group-item list-group-item-action " data-toggle="list" href="#">Transaction history</a>                      
                             <a id="pay" class="list-group-item list-group-item-action " data-toggle="list" href="#">Pay</a>
                             <a id="wallet" class="list-group-item list-group-item-action " data-toggle="list" href="#">Wallet</a>           
-                            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>                  
+                            
                         </div>
                     </div>
 
@@ -217,13 +248,11 @@
                             </div>
 
 
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
+</div>
+                                        </div>
         <%@include file="footer.jsp" %>
         <!-- Footer End -->
 
@@ -238,6 +267,7 @@
         <script src="lib/waypoints/waypoints.min.js"></script>
         <script src="lib/owlcarousel/owl.carousel.min.js"></script>
         <!-- Template Javascript -->
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js'></script>
         <script src="js/main.js"></script>
         <script>
             // Chọn các phần tử link
@@ -248,6 +278,7 @@
             const passwordLink = document.getElementById('password');
             const generalLink = document.getElementById('general');
             const cvLink = document.getElementById('cv');
+            
 
             // Thêm sự kiện click cho từng link
             passwordLink.addEventListener('click', function () {
@@ -268,6 +299,9 @@
             cvLink.addEventListener('click', function () {
                 window.location.href = 'cv';
             });
+            generalLink.addEventListener('click', function () {
+                window.location.href = 'profile';
+            });
 
             // Hiển thị ảnh mới chọn
             document.getElementById('avatarInput').addEventListener('change', function (event) {
@@ -277,5 +311,6 @@
                 }
             });
         </script>
+        s/bootstrap.bundle.min.js'></script>
     </body>
 </html>
