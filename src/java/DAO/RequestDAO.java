@@ -184,7 +184,7 @@ public class RequestDAO {
             ps.setInt(1, rid);
             ps.setInt(2, oid);
             ps.executeUpdate();
-            ps = dbo.prepareStatement("UPDATE [Slot] SET [Status] = N'Not Paid', [SkillID] = (SELECT [SkillID] FROM [Request] WHERE [RequestID] = ? AND [UserID] = ?), MenteeID = (SELECT [SenderID] FROM [Request] WHERE [RequestID] = ? AND [UserID] = ?) WHERE [SlotID] in (SELECT [SlotID] FROM [RequestSlot] WHERE [RequestID] = ?)");
+            ps = dbo.prepareStatement("UPDATE [Slot] SET [Status] = N'Not Paid', [SkillID] = (SELECT [SkillID] FROM [Request] WHERE [RequestID] = ? AND [UserID] = ?), MenteeID = (SELECT [SendID] FROM [Request] WHERE [RequestID] = ? AND [UserID] = ?) WHERE [SlotID] in (SELECT [SlotID] FROM [RequestSlot] WHERE [RequestID] = ?)");
             ps.setInt(1, rid);
             ps.setInt(2, oid);
             ps.setInt(3, rid);
@@ -206,7 +206,7 @@ public class RequestDAO {
             ps.setInt(1, rid);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SenderID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
+                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SendID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
                 ps = dbo.prepareStatement("SELECT [fullname] FROM [User] WHERE [UserID] = ?");
                 ps.setInt(1, r.getUserID());
                 ResultSet rs2 = ps.executeQuery();
@@ -241,11 +241,11 @@ public class RequestDAO {
         Connection dbo = DatabaseUtil.getConn();
         ArrayList<Request> arr = new ArrayList();
         try {
-            PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Request] WHERE [UserID] = ? AND ((([RequestStatus] = N'Open' OR [RequestStatus] = N'Reopen' OR [RequestStatus] = N'Reject'  OR [RequestStatus] = N'Close') AND [DeadlineTime] > GETDATE()) OR ([RequestStatus] = N'Accept' OR [RequestStatus] = N'Processing' OR [RequestStatus] = N'Done'))");
+            PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Request] WHERE [SendID] = ? AND ((([RequestStatus] = N'Open' OR [RequestStatus] = N'Reopen' OR [RequestStatus] = N'Reject'  OR [RequestStatus] = N'Close') AND [DeadlineTime] > GETDATE()) OR ([RequestStatus] = N'Accept' OR [RequestStatus] = N'Processing' OR [RequestStatus] = N'Done'))");
             ps.setInt(1, uid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SenderID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
+                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SendID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
                 ps = dbo.prepareStatement("SELECT [fullname] FROM [User] WHERE [UserID] = ?");
                 ps.setInt(1, r.getSendID());
                 ResultSet rs2 = ps.executeQuery();
@@ -263,7 +263,7 @@ public class RequestDAO {
                 ps.setInt(1, rs.getInt("RequestID"));
                 rs2 = ps.executeQuery();
                 while (rs2.next()) {
-                    r.getSkills().add(new Skill(rs2.getInt("SkillID"), rs2.getString("SkillName"), rs2.getInt("enable") == 1, rs2.getString("Imageskill"), rs2.getString("Skilldescription")));
+                    r.getSkills().add(new Skill(rs2.getInt("SkillID"), rs2.getString("SkillName"), rs2.getInt("enable") == 1, rs2.getString("image"), rs2.getString("Description")));
                 }
                 arr.add(r);
             }
@@ -279,11 +279,11 @@ public class RequestDAO {
         Connection dbo = DatabaseUtil.getConn();
         ArrayList<Request> arr = new ArrayList();
         try {
-            PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Request] WHERE [SenderID] = ? AND ((([RequestStatus] = N'Open' OR [RequestStatus] = N'Reopen' OR [RequestStatus] = N'Reject'  OR [RequestStatus] = N'Close') AND [DeadlineTime] > GETDATE()) OR ([RequestStatus] = N'Accept' OR [RequestStatus] = N'Processing' OR [RequestStatus] = N'Done'))");
+            PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Request] WHERE [UserID] = ? AND ((([RequestStatus] = N'Open' OR [RequestStatus] = N'Reopen' OR [RequestStatus] = N'Reject'  OR [RequestStatus] = N'Close') AND [DeadlineTime] > GETDATE()) OR ([RequestStatus] = N'Accept' OR [RequestStatus] = N'Processing' OR [RequestStatus] = N'Done'))");
             ps.setInt(1, uid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SenderID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
+                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SendID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
                 ps = dbo.prepareStatement("SELECT [fullname] FROM [User] WHERE [UserID] = ?");
                 ps.setInt(1, r.getUserID());
                 ResultSet rs2 = ps.executeQuery();
@@ -308,7 +308,7 @@ public class RequestDAO {
                 ps.setInt(1, rs.getInt("RequestID"));
                 rs2 = ps.executeQuery();
                 while (rs2.next()) {
-                    r.getSkills().add(new Skill(rs2.getInt("SkillID"), rs2.getString("SkillName"), rs2.getInt("enable") == 1, rs2.getString("Imageskill"), rs2.getString("Skilldescription")));
+                    r.getSkills().add(new Skill(rs2.getInt("SkillID"), rs2.getString("SkillName"), rs2.getInt("enable") == 1, rs2.getString("image"), rs2.getString("Description")));
                 }
                 arr.add(r);
             }
@@ -327,7 +327,7 @@ public class RequestDAO {
             PreparedStatement ps = dbo.prepareStatement("SELECT * FROM [Request]");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SenderID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
+                Request r = new Request(rs.getInt("RequestID"), rs.getInt("SendID"), rs.getInt("UserID"), rs.getString("RequestReason"), rs.getString("RequestStatus"), rs.getString("RequestSubject"), rs.getTimestamp("RequestTime"), rs.getTimestamp("DeadlineTime"));
                 ps = dbo.prepareStatement("SELECT [fullname] FROM [User] WHERE [UserID] = ?");
                 ps.setInt(1, r.getUserID());
                 ResultSet rs2 = ps.executeQuery();
@@ -390,7 +390,7 @@ public class RequestDAO {
     public static boolean createRequest(String[] skills, Timestamp deadline, String subject, String reason, int sid, int uid, String[] slots) throws Exception {
         Connection dbo = DatabaseUtil.getConn();
         try {
-            PreparedStatement ps = dbo.prepareStatement("INSERT INTO [Request] ([SenderID], [UserID], [RequestSubject], [RequestReason], [DeadlineTime], [RequestStatus], [SkillID]) VALUES (?, ?, ?, ?, ?, 'Open', ?)");
+            PreparedStatement ps = dbo.prepareStatement("INSERT INTO [Request] ([SendID], [UserID], [RequestSubject], [RequestReason], [DeadlineTime], [RequestStatus], [SkillID]) VALUES (?, ?, ?, ?, ?, 'Open', ?)");
             ps.setInt(1, sid);
             ps.setInt(2, uid);
             ps.setString(3, subject);
@@ -415,4 +415,14 @@ public class RequestDAO {
         }
         return false;
     }
+    
+//    public static void main(String[] args){
+//        try{
+//            ArrayList<Request> requests= getMentorRequests(3);
+//            for(Request r:requests){
+//                System.out.println(r.getId());
+//            }
+//        }catch(Exception e){}
+//        
+//    }
 }
